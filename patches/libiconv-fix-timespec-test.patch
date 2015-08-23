@@ -1,0 +1,12 @@
+diff -ru libiconv-1.14.orig/configure libiconv-1.14/configure
+--- libiconv-1.14.orig/configure	2011-08-07 12:49:02 -0500
++++ libiconv-1.14/configure	2015-08-21 15:49:13 -0500
+@@ -19361,6 +19361,8 @@
+ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
++/* MinGW does not define timespec unless unistd.h is included. */
++#include <unistd.h>
+ #include <time.h>
+ 
+ int

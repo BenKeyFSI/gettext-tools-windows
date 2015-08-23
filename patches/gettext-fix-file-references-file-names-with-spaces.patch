@@ -1,0 +1,504 @@
+diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgattrib.c gettext-0.19.5.1/gettext-tools/src/msgattrib.c
+--- gettext-0.19.5.1.orig/gettext-tools/src/msgattrib.c	2015-06-22 03:42:03.000000000 -0500
++++ gettext-0.19.5.1/gettext-tools/src/msgattrib.c	2015-08-22 22:34:06.283411023 -0500
+@@ -120,6 +120,7 @@
+   { "untranslated", no_argument, NULL, CHAR_MAX + 2 },
+   { "version", no_argument, NULL, 'V' },
+   { "width", required_argument, NULL, 'w', },
++  { "combine-refs", no_argument, NULL, CHAR_MAX + 24 },
+   { NULL, 0, NULL, 0 }
+ };
+ 
+@@ -343,6 +344,10 @@
+         to_change |= REMOVE_TRANSLATION;
+         break;
+ 
++      case CHAR_MAX + 24: /* --combine-refs */
++        message_page_combine_refs();
++        break;
++
+       default:
+         usage (EXIT_FAILURE);
+         /* NOTREACHED */
+@@ -531,6 +536,9 @@
+   -s, --sort-output           generate sorted output\n"));
+       printf (_("\
+   -F, --sort-by-file          sort output by file location\n"));
++      printf (_("\
++      --combine-refs          Combine multiple file references on a single line.\n\
++                              This restores the old behavior.\n"));
+       printf ("\n");
+       printf (_("\
+ Informative output:\n"));
+diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgcat.c gettext-0.19.5.1/gettext-tools/src/msgcat.c
+--- gettext-0.19.5.1.orig/gettext-tools/src/msgcat.c	2015-06-22 03:42:03.000000000 -0500
++++ gettext-0.19.5.1/gettext-tools/src/msgcat.c	2015-08-22 22:34:06.283411023 -0500
+@@ -91,6 +91,7 @@
+   { "width", required_argument, NULL, 'w', },
+   { "more-than", required_argument, NULL, '>', },
+   { "less-than", required_argument, NULL, '<', },
++  { "combine-refs", no_argument, NULL, CHAR_MAX + 9 },
+   { NULL, 0, NULL, 0 }
+ };
+ 
+@@ -282,6 +283,10 @@
+         message_print_style_filepos (filepos_comment_none);
+         break;
+ 
++      case CHAR_MAX + 9: /* --combine-refs */
++        message_page_combine_refs();
++        break;
++
+       default:
+         usage (EXIT_FAILURE);
+         /* NOTREACHED */
+@@ -466,6 +471,9 @@
+   -s, --sort-output           generate sorted output\n"));
+       printf (_("\
+   -F, --sort-by-file          sort output by file location\n"));
++      printf (_("\
++      --combine-refs          Combine multiple file references on a single line.\n\
++                              This restores the old behavior.\n"));
+       printf ("\n");
+       printf (_("\
+ Informative output:\n"));
+diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgcomm.c gettext-0.19.5.1/gettext-tools/src/msgcomm.c
+--- gettext-0.19.5.1.orig/gettext-tools/src/msgcomm.c	2015-06-22 03:42:03.000000000 -0500
++++ gettext-0.19.5.1/gettext-tools/src/msgcomm.c	2015-08-22 22:34:06.283411023 -0500
+@@ -92,6 +92,7 @@
+   { "width", required_argument, NULL, 'w', },
+   { "more-than", required_argument, NULL, '>', },
+   { "less-than", required_argument, NULL, '<', },
++  { "combine-refs", no_argument, NULL, CHAR_MAX + 8 },
+   { NULL, 0, NULL, 0 }
+ };
+ 
+@@ -273,6 +274,10 @@
+         message_print_style_filepos (filepos_comment_none);
+         break;
+ 
++      case CHAR_MAX + 8: /* --combine-refs */
++        message_page_combine_refs();
++        break;
++
+       default:
+         usage (EXIT_FAILURE);
+         /* NOTREACHED */
+@@ -452,6 +457,9 @@
+   -F, --sort-by-file          sort output by file location\n"));
+       printf (_("\
+       --omit-header           don't write header with 'msgid \"\"' entry\n"));
++      printf (_("\
++      --combine-refs          Combine multiple file references on a single line.\n\
++                              This restores the old behavior.\n"));
+       printf ("\n");
+       printf (_("\
+ Informative output:\n"));
+diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgconv.c gettext-0.19.5.1/gettext-tools/src/msgconv.c
+--- gettext-0.19.5.1.orig/gettext-tools/src/msgconv.c	2015-06-22 03:42:03.000000000 -0500
++++ gettext-0.19.5.1/gettext-tools/src/msgconv.c	2015-08-22 22:34:06.287411023 -0500
+@@ -83,6 +83,7 @@
+   { "to-code", required_argument, NULL, 't' },
+   { "version", no_argument, NULL, 'V' },
+   { "width", required_argument, NULL, 'w', },
++  { "combine-refs", no_argument, NULL, CHAR_MAX + 7 },
+   { NULL, 0, NULL, 0 }
+ };
+ 
+@@ -232,6 +233,10 @@
+         message_print_style_filepos (filepos_comment_none);
+         break;
+ 
++      case CHAR_MAX + 7: /* --combine-refs */
++        message_page_combine_refs();
++        break;
++
+       default:
+         usage (EXIT_FAILURE);
+         break;
+@@ -382,6 +387,9 @@
+   -s, --sort-output           generate sorted output\n"));
+       printf (_("\
+   -F, --sort-by-file          sort output by file location\n"));
++      printf (_("\
++      --combine-refs          Combine multiple file references on a single line.\n\
++                              This restores the old behavior.\n"));
+       printf ("\n");
+       printf (_("\
+ Informative output:\n"));
+diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgen.c gettext-0.19.5.1/gettext-tools/src/msgen.c
+--- gettext-0.19.5.1.orig/gettext-tools/src/msgen.c	2015-06-22 03:42:03.000000000 -0500
++++ gettext-0.19.5.1/gettext-tools/src/msgen.c	2015-08-22 22:34:06.287411023 -0500
+@@ -80,6 +80,7 @@
+   { "style", required_argument, NULL, CHAR_MAX + 6 },
+   { "version", no_argument, NULL, 'V' },
+   { "width", required_argument, NULL, 'w', },
++  { "combine-refs", no_argument, NULL, CHAR_MAX + 8 },
+   { NULL, 0, NULL, 0 }
+ };
+ 
+@@ -229,6 +230,10 @@
+         message_print_style_filepos (filepos_comment_none);
+         break;
+ 
++      case CHAR_MAX + 8: /* --combine-refs */
++        message_page_combine_refs();
++        break;
++
+       default:
+         usage (EXIT_FAILURE);
+         break;
+@@ -378,6 +383,9 @@
+   -s, --sort-output           generate sorted output\n"));
+       printf (_("\
+   -F, --sort-by-file          sort output by file location\n"));
++      printf (_("\
++      --combine-refs          Combine multiple file references on a single line.\n\
++                              This restores the old behavior.\n"));
+       printf ("\n");
+       printf (_("\
+ Informative output:\n"));
+diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgfilter.c gettext-0.19.5.1/gettext-tools/src/msgfilter.c
+--- gettext-0.19.5.1.orig/gettext-tools/src/msgfilter.c	2015-06-22 03:42:03.000000000 -0500
++++ gettext-0.19.5.1/gettext-tools/src/msgfilter.c	2015-08-22 22:34:06.287411023 -0500
+@@ -113,6 +113,7 @@
+   { "style", required_argument, NULL, CHAR_MAX + 7 },
+   { "version", no_argument, NULL, 'V' },
+   { "width", required_argument, NULL, 'w', },
++  { "combine-refs", no_argument, NULL, CHAR_MAX + 10 },
+   { NULL, 0, NULL, 0 }
+ };
+ 
+@@ -276,6 +277,10 @@
+         newline = true;
+         break;
+ 
++      case CHAR_MAX + 10: /* --combine-refs */
++        message_page_combine_refs();
++        break;
++
+       default:
+         usage (EXIT_FAILURE);
+         break;
+@@ -504,6 +509,9 @@
+   -s, --sort-output           generate sorted output\n"));
+       printf (_("\
+   -F, --sort-by-file          sort output by file location\n"));
++      printf (_("\
++      --combine-refs          Combine multiple file references on a single line.\n\
++                              This restores the old behavior.\n"));
+       printf ("\n");
+       printf (_("\
+ Informative output:\n"));
+diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msggrep.c gettext-0.19.5.1/gettext-tools/src/msggrep.c
+--- gettext-0.19.5.1.orig/gettext-tools/src/msggrep.c	2015-06-22 03:42:03.000000000 -0500
++++ gettext-0.19.5.1/gettext-tools/src/msggrep.c	2015-08-22 22:34:06.287411023 -0500
+@@ -126,6 +126,7 @@
+   { "style", required_argument, NULL, CHAR_MAX + 10 },
+   { "version", no_argument, NULL, 'V' },
+   { "width", required_argument, NULL, 'w' },
++  { "combine-refs", no_argument, NULL, CHAR_MAX + 12 },
+   { NULL, 0, NULL, 0 }
+ };
+ 
+@@ -407,6 +408,10 @@
+         message_print_style_filepos (filepos_comment_none);
+         break;
+ 
++      case CHAR_MAX + 12: /* --combine-refs */
++        message_page_combine_refs();
++        break;
++
+       default:
+         usage (EXIT_FAILURE);
+         break;
+@@ -625,6 +630,9 @@
+       --sort-output           generate sorted output\n"));
+       printf (_("\
+       --sort-by-file          sort output by file location\n"));
++      printf (_("\
++      --combine-refs          Combine multiple file references on a single line.\n\
++                              This restores the old behavior.\n"));
+       printf ("\n");
+       printf (_("\
+ Informative output:\n"));
+diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msginit.c gettext-0.19.5.1/gettext-tools/src/msginit.c
+--- gettext-0.19.5.1.orig/gettext-tools/src/msginit.c	2015-07-09 03:16:10.000000000 -0500
++++ gettext-0.19.5.1/gettext-tools/src/msginit.c	2015-08-22 22:34:06.287411023 -0500
+@@ -128,6 +128,7 @@
+   { "style", required_argument, NULL, CHAR_MAX + 6 },
+   { "version", no_argument, NULL, 'V' },
+   { "width", required_argument, NULL, 'w' },
++  { "combine-refs", no_argument, NULL, CHAR_MAX + 7 },
+   { NULL, 0, NULL, 0 }
+ };
+ 
+@@ -256,6 +257,10 @@
+         handle_style_option (optarg);
+         break;
+ 
++      case CHAR_MAX + 7: /* --combine-refs */
++        message_page_combine_refs();
++        break;
++
+       default:
+         usage (EXIT_FAILURE);
+         break;
+@@ -417,6 +422,9 @@
+       printf (_("\
+       --no-wrap               do not break long message lines, longer than\n\
+                               the output page width, into several lines\n"));
++      printf (_("\
++      --combine-refs          Combine multiple file references on a single line.\n\
++                              This restores the old behavior.\n"));
+       printf ("\n");
+       printf (_("\
+ Informative output:\n"));
+diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgmerge.c gettext-0.19.5.1/gettext-tools/src/msgmerge.c
+--- gettext-0.19.5.1.orig/gettext-tools/src/msgmerge.c	2015-06-22 03:42:03.000000000 -0500
++++ gettext-0.19.5.1/gettext-tools/src/msgmerge.c	2015-08-22 22:34:06.291411023 -0500
+@@ -140,6 +140,7 @@
+   { "verbose", no_argument, NULL, 'v' },
+   { "version", no_argument, NULL, 'V' },
+   { "width", required_argument, NULL, 'w', },
++  { "combine-refs", no_argument, NULL, CHAR_MAX + 12 },
+   { NULL, 0, NULL, 0 }
+ };
+ 
+@@ -344,6 +345,10 @@
+         message_print_style_filepos (filepos_comment_none);
+         break;
+ 
++      case CHAR_MAX + 12: /* --combine-refs */
++        message_page_combine_refs();
++        break;
++
+       default:
+         usage (EXIT_FAILURE);
+         break;
+@@ -616,6 +621,9 @@
+   -s, --sort-output           generate sorted output\n"));
+       printf (_("\
+   -F, --sort-by-file          sort output by file location\n"));
++      printf (_("\
++      --combine-refs          Combine multiple file references on a single line.\n\
++                              This restores the old behavior.\n"));
+       printf ("\n");
+       printf (_("\
+ Informative output:\n"));
+diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgunfmt.c gettext-0.19.5.1/gettext-tools/src/msgunfmt.c
+--- gettext-0.19.5.1.orig/gettext-tools/src/msgunfmt.c	2015-06-22 03:42:03.000000000 -0500
++++ gettext-0.19.5.1/gettext-tools/src/msgunfmt.c	2015-08-22 22:34:06.291411023 -0500
+@@ -101,6 +101,7 @@
+   { "verbose", no_argument, NULL, 'v' },
+   { "version", no_argument, NULL, 'V' },
+   { "width", required_argument, NULL, 'w', },
++  { "combine-refs", no_argument, NULL, CHAR_MAX + 8 },
+   { NULL, 0, NULL, 0 }
+ };
+ 
+@@ -250,6 +251,10 @@
+         handle_style_option (optarg);
+         break;
+ 
++      case CHAR_MAX + 8: /* --combine-refs */
++        message_page_combine_refs();
++        break;
++
+       default:
+         usage (EXIT_FAILURE);
+         break;
+@@ -524,6 +529,9 @@
+                               the output page width, into several lines\n"));
+       printf (_("\
+   -s, --sort-output           generate sorted output\n"));
++      printf (_("\
++      --combine-refs          Combine multiple file references on a single line.\n\
++                              This restores the old behavior.\n"));
+       printf ("\n");
+       printf (_("\
+ Informative output:\n"));
+diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msguniq.c gettext-0.19.5.1/gettext-tools/src/msguniq.c
+--- gettext-0.19.5.1.orig/gettext-tools/src/msguniq.c	2015-06-22 03:42:03.000000000 -0500
++++ gettext-0.19.5.1/gettext-tools/src/msguniq.c	2015-08-22 22:34:06.291411023 -0500
+@@ -86,6 +86,7 @@
+   { "use-first", no_argument, NULL, CHAR_MAX + 1 },
+   { "version", no_argument, NULL, 'V' },
+   { "width", required_argument, NULL, 'w', },
++  { "combine-refs", no_argument, NULL, CHAR_MAX + 8 },
+   { NULL, 0, NULL, 0 }
+ };
+ 
+@@ -252,6 +253,10 @@
+         message_print_style_filepos (filepos_comment_none);
+         break;
+ 
++      case CHAR_MAX + 8: /* --combine-refs */
++        message_page_combine_refs();
++        break;
++
+       default:
+         usage (EXIT_FAILURE);
+         /* NOTREACHED */
+@@ -414,6 +419,9 @@
+   -s, --sort-output           generate sorted output\n"));
+       printf (_("\
+   -F, --sort-by-file          sort output by file location\n"));
++      printf (_("\
++      --combine-refs          Combine multiple file references on a single line.\n\
++                              This restores the old behavior.\n"));
+       printf ("\n");
+       printf (_("\
+ Informative output:\n"));
+diff -ru gettext-0.19.5.1.orig/gettext-tools/src/read-catalog-abstract.c gettext-0.19.5.1/gettext-tools/src/read-catalog-abstract.c
+--- gettext-0.19.5.1.orig/gettext-tools/src/read-catalog-abstract.c	2015-06-22 03:42:03.000000000 -0500
++++ gettext-0.19.5.1/gettext-tools/src/read-catalog-abstract.c	2015-08-22 22:34:06.291411023 -0500
+@@ -445,6 +445,39 @@
+     }
+ }
+ 
++/* Helper function that is used by po_parse_comment_filepos to find the end of the file name.
++Allows for spaces in file names. */
++static const char* po_parse_comment_find_end_of_file_name(const char* s)
++{
++  const char* ret = s;
++  /* At this point, s points to the beginning of the file name. Advance s to the end of
++  the file name. Allow file names that contain spaces. */
++  do
++  {
++    ++ret;
++  } while (!(ret[0] == '\0' || ret[0] == ':' || ret[0] == '\t' || ret[0] == '\n'));
++  /* Note that if the file was generated on a Microsoft Windows system and the file reference
++  is a full path and file name, the : may be part of the file name. Test for that scenario here. */
++  if (ret[0] == ':' && (ret[1] == '\\' || ret[1] == '/'))
++  {
++    do
++    {
++      ret++;
++    } while (!(ret[0] == '\0' || ret[0] == ':' || ret[0] == '\t' || ret[0] == '\n'));
++  }
++  /* It is possible that we have moved beyond the end of the file name, such as when the
++  line is formatted as follows.
++    #: File Name : Line
++  Make certain that s points just beyond the end of the file name. */
++  if (ret > s && ret[0] == ':' && ret[-1] == ' ')
++  {
++    do
++    {
++      --ret;
++    } while (ret > s && *ret == ':' && ret[-1] == ' ');
++  }
++  return ret;
++}
+ 
+ /* Parse a GNU style file comment.
+    Syntax: an arbitrary number of
+@@ -464,10 +497,7 @@
+       if (*s != '\0')
+         {
+           const char *string_start = s;
+-
+-          do
+-            s++;
+-          while (!(*s == '\0' || *s == ' ' || *s == '\t' || *s == '\n'));
++          s = po_parse_comment_find_end_of_file_name(s);
+ 
+           /* See if there is a COLON and NUMBER after the STRING, separated
+              through optional spaces.  */
+diff -ru gettext-0.19.5.1.orig/gettext-tools/src/write-po.c gettext-0.19.5.1/gettext-tools/src/write-po.c
+--- gettext-0.19.5.1.orig/gettext-tools/src/write-po.c	2015-06-22 03:42:03.000000000 -0500
++++ gettext-0.19.5.1/gettext-tools/src/write-po.c	2015-08-22 22:35:13.843413530 -0500
+@@ -304,6 +304,11 @@
+     }
+ }
+ 
++/* This variable controls whether or not an attempt is made to combine multiple file references on
++one line. The default is to not do so. The old behavior of combining multiple file references on one
++line can be restored by calling the message_page_combine_refs function, which is user accessible via
++the --combine-refs command line argument. */
++static bool combine_refs = false;
+ 
+ /* Output mp->filepos as a set of comment lines.  */
+ 
+@@ -401,7 +406,15 @@
+               else
+                 sprintf (buffer, ":%ld", (long) pp->line_number);
+               len = strlen (cp) + strlen (buffer) + 1;
+-              if (column > 2 && column + len > page_width)
++              if (combine_refs)
++                {
++                  if (column > 2 && column + len > page_width)
++                    {
++                      ostream_write_str (stream, "\n#:");
++                      column = 2;
++                    }
++                }
++              else if (j > 0)
+                 {
+                   ostream_write_str (stream, "\n#:");
+                   column = 2;
+@@ -510,7 +523,6 @@
+ 
+ /* ========= Some parameters for use by 'msgdomain_list_print_po'. ========= */
+ 
+-
+ /* This variable controls the extent to which the page width applies.
+    True means it applies to message strings and file reference lines.
+    False means it applies to file reference lines only.  */
+@@ -553,6 +565,11 @@
+   filepos_comment_type = type;
+ }
+ 
++void
++message_page_combine_refs(void)
++{
++  combine_refs = true;
++}
+ 
+ /* --add-location argument handling.  Return an error indicator.  */
+ bool
+Only in gettext-0.19.5.1/gettext-tools/src: write-po.c~
+diff -ru gettext-0.19.5.1.orig/gettext-tools/src/write-po.h gettext-0.19.5.1/gettext-tools/src/write-po.h
+--- gettext-0.19.5.1.orig/gettext-tools/src/write-po.h	2015-06-22 03:42:03.000000000 -0500
++++ gettext-0.19.5.1/gettext-tools/src/write-po.h	2015-08-22 22:34:06.291411023 -0500
+@@ -62,6 +62,8 @@
+ 
+ /* These functions set some parameters for use by 'output_format_po.print'.  */
+ extern void
++       message_page_combine_refs(void);
++extern void
+        message_page_width_ignore (void);
+ extern void
+        message_print_style_indent (void);
+diff -ru gettext-0.19.5.1.orig/gettext-tools/src/xgettext.c gettext-0.19.5.1/gettext-tools/src/xgettext.c
+--- gettext-0.19.5.1.orig/gettext-tools/src/xgettext.c	2015-06-22 03:42:04.000000000 -0500
++++ gettext-0.19.5.1/gettext-tools/src/xgettext.c	2015-08-22 22:34:06.291411023 -0500
+@@ -254,6 +254,7 @@
+   { "trigraphs", no_argument, NULL, 'T' },
+   { "version", no_argument, NULL, 'V' },
+   { "width", required_argument, NULL, 'w', },
++  { "combine-refs", no_argument, NULL, CHAR_MAX + 19 },
+   { NULL, 0, NULL, 0 }
+ };
+ 
+@@ -633,6 +634,10 @@
+           error (EXIT_FAILURE, 0, _("sentence end type '%s' unknown"), optarg);
+         break;
+ 
++      case CHAR_MAX + 19: /* --combine-refs */
++        message_page_combine_refs();
++        break;
++
+       default:
+         usage (EXIT_FAILURE);
+         /* NOTREACHED */
+@@ -1076,6 +1081,9 @@
+       printf (_("\
+   -M[STRING], --msgstr-suffix[=STRING]  use STRING or \"\" as suffix for msgstr\n\
+                                 values\n"));
++      printf (_("\
++      --combine-refs          Combine multiple file references on a single line.\n\
++                              This restores the old behavior.\n"));
+       printf ("\n");
+       printf (_("\
+ Informative output:\n"));

@@ -1,4 +1,3 @@
-
 GETTEXT_VERSION  = 0.19.5.1
 LIBICONV_VERSION = 1.14
 EXPAT_VERSION    = 2.1.0
@@ -53,6 +52,7 @@ EXPAT_COMPILE  := $(COMPILEDIR)/EXPAT.built
 
 LIBICONV_DOWNLOAD := $(DOWNLOADDIR)/$(LIBICONV_FILE)
 LIBICONV_COMPILE  := $(COMPILEDIR)/LIBICONV.built
+LIBICONV_PATCHES  := $(wildcard $(PATCHESDIR)/libiconv*)
 
 GETTEXT_DOWNLOAD := $(DOWNLOADDIR)/$(GETTEXT_FILE)
 GETTEXT_COMPILE  := $(COMPILEDIR)/GETTEXT.built
@@ -69,7 +69,7 @@ $(EXPAT_DOWNLOAD):
 	wget -O $@ $(EXPAT_URL)
 
 $(EXPAT_COMPILE): $(EXPAT_DOWNLOAD)
-	mkdir -p $(COMPILEDIR)/expat
+	mkdir -p $(COMPILEDIR)
 	mkdir -p $(STAGEDIR)
 	tar -C $(COMPILEDIR) -xzf $<
 	cd $(COMPILEDIR)/expat-$(EXPAT_VERSION) && \
@@ -85,9 +85,13 @@ $(LIBICONV_DOWNLOAD):
 	wget -O $@ $(LIBICONV_URL)
 
 $(LIBICONV_COMPILE): $(LIBICONV_DOWNLOAD)
-	mkdir -p $(COMPILEDIR)/expat
+	mkdir -p $(COMPILEDIR)
 	mkdir -p $(STAGEDIR)
 	tar -C $(COMPILEDIR) -xzf $<
+	cd $(COMPILEDIR)/libiconv-$(LIBICONV_VERSION) && \
+	for p in $(LIBICONV_PATCHES) ; do \
+		patch -p1 < $$p ; \
+	done
 	cd $(COMPILEDIR)/libiconv-$(LIBICONV_VERSION) && \
 		./configure $(LIBICONV_FLAGS) CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" && \
 		make && \
@@ -101,7 +105,7 @@ $(GETTEXT_DOWNLOAD):
 	wget -O $@ $(GETTEXT_URL)
 
 $(GETTEXT_COMPILE): $(GETTEXT_DOWNLOAD) $(EXPAT_COMPILE) $(LIBICONV_COMPILE)
-	mkdir -p $(COMPILEDIR)/expat
+	mkdir -p $(COMPILEDIR)
 	mkdir -p $(STAGEDIR)
 	tar -C $(COMPILEDIR) -xzf $<
 	cd $(COMPILEDIR)/gettext-$(GETTEXT_VERSION) && \
