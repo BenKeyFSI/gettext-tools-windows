@@ -1,6 +1,6 @@
 diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgattrib.c gettext-0.19.5.1/gettext-tools/src/msgattrib.c
 --- gettext-0.19.5.1.orig/gettext-tools/src/msgattrib.c	2015-06-22 03:42:03.000000000 -0500
-+++ gettext-0.19.5.1/gettext-tools/src/msgattrib.c	2015-08-22 22:34:06.283411023 -0500
++++ gettext-0.19.5.1/gettext-tools/src/msgattrib.c	2015-08-28 10:20:06.010766858 -0500
 @@ -120,6 +120,7 @@
    { "untranslated", no_argument, NULL, CHAR_MAX + 2 },
    { "version", no_argument, NULL, 'V' },
@@ -32,7 +32,7 @@ diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgattrib.c gettext-0.19.5.1/ge
  Informative output:\n"));
 diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgcat.c gettext-0.19.5.1/gettext-tools/src/msgcat.c
 --- gettext-0.19.5.1.orig/gettext-tools/src/msgcat.c	2015-06-22 03:42:03.000000000 -0500
-+++ gettext-0.19.5.1/gettext-tools/src/msgcat.c	2015-08-22 22:34:06.283411023 -0500
++++ gettext-0.19.5.1/gettext-tools/src/msgcat.c	2015-08-28 10:20:06.010766858 -0500
 @@ -91,6 +91,7 @@
    { "width", required_argument, NULL, 'w', },
    { "more-than", required_argument, NULL, '>', },
@@ -64,7 +64,7 @@ diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgcat.c gettext-0.19.5.1/gette
  Informative output:\n"));
 diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgcomm.c gettext-0.19.5.1/gettext-tools/src/msgcomm.c
 --- gettext-0.19.5.1.orig/gettext-tools/src/msgcomm.c	2015-06-22 03:42:03.000000000 -0500
-+++ gettext-0.19.5.1/gettext-tools/src/msgcomm.c	2015-08-22 22:34:06.283411023 -0500
++++ gettext-0.19.5.1/gettext-tools/src/msgcomm.c	2015-08-28 10:20:06.014766858 -0500
 @@ -92,6 +92,7 @@
    { "width", required_argument, NULL, 'w', },
    { "more-than", required_argument, NULL, '>', },
@@ -96,7 +96,7 @@ diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgcomm.c gettext-0.19.5.1/gett
  Informative output:\n"));
 diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgconv.c gettext-0.19.5.1/gettext-tools/src/msgconv.c
 --- gettext-0.19.5.1.orig/gettext-tools/src/msgconv.c	2015-06-22 03:42:03.000000000 -0500
-+++ gettext-0.19.5.1/gettext-tools/src/msgconv.c	2015-08-22 22:34:06.287411023 -0500
++++ gettext-0.19.5.1/gettext-tools/src/msgconv.c	2015-08-28 10:20:06.014766858 -0500
 @@ -83,6 +83,7 @@
    { "to-code", required_argument, NULL, 't' },
    { "version", no_argument, NULL, 'V' },
@@ -128,7 +128,7 @@ diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgconv.c gettext-0.19.5.1/gett
  Informative output:\n"));
 diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgen.c gettext-0.19.5.1/gettext-tools/src/msgen.c
 --- gettext-0.19.5.1.orig/gettext-tools/src/msgen.c	2015-06-22 03:42:03.000000000 -0500
-+++ gettext-0.19.5.1/gettext-tools/src/msgen.c	2015-08-22 22:34:06.287411023 -0500
++++ gettext-0.19.5.1/gettext-tools/src/msgen.c	2015-08-28 10:20:06.014766858 -0500
 @@ -80,6 +80,7 @@
    { "style", required_argument, NULL, CHAR_MAX + 6 },
    { "version", no_argument, NULL, 'V' },
@@ -160,7 +160,7 @@ diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgen.c gettext-0.19.5.1/gettex
  Informative output:\n"));
 diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgfilter.c gettext-0.19.5.1/gettext-tools/src/msgfilter.c
 --- gettext-0.19.5.1.orig/gettext-tools/src/msgfilter.c	2015-06-22 03:42:03.000000000 -0500
-+++ gettext-0.19.5.1/gettext-tools/src/msgfilter.c	2015-08-22 22:34:06.287411023 -0500
++++ gettext-0.19.5.1/gettext-tools/src/msgfilter.c	2015-08-28 10:20:06.014766858 -0500
 @@ -113,6 +113,7 @@
    { "style", required_argument, NULL, CHAR_MAX + 7 },
    { "version", no_argument, NULL, 'V' },
@@ -192,7 +192,7 @@ diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgfilter.c gettext-0.19.5.1/ge
  Informative output:\n"));
 diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msggrep.c gettext-0.19.5.1/gettext-tools/src/msggrep.c
 --- gettext-0.19.5.1.orig/gettext-tools/src/msggrep.c	2015-06-22 03:42:03.000000000 -0500
-+++ gettext-0.19.5.1/gettext-tools/src/msggrep.c	2015-08-22 22:34:06.287411023 -0500
++++ gettext-0.19.5.1/gettext-tools/src/msggrep.c	2015-08-28 10:20:06.014766858 -0500
 @@ -126,6 +126,7 @@
    { "style", required_argument, NULL, CHAR_MAX + 10 },
    { "version", no_argument, NULL, 'V' },
@@ -224,7 +224,7 @@ diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msggrep.c gettext-0.19.5.1/gett
  Informative output:\n"));
 diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msginit.c gettext-0.19.5.1/gettext-tools/src/msginit.c
 --- gettext-0.19.5.1.orig/gettext-tools/src/msginit.c	2015-07-09 03:16:10.000000000 -0500
-+++ gettext-0.19.5.1/gettext-tools/src/msginit.c	2015-08-22 22:34:06.287411023 -0500
++++ gettext-0.19.5.1/gettext-tools/src/msginit.c	2015-08-28 10:20:06.014766858 -0500
 @@ -128,6 +128,7 @@
    { "style", required_argument, NULL, CHAR_MAX + 6 },
    { "version", no_argument, NULL, 'V' },
@@ -256,7 +256,7 @@ diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msginit.c gettext-0.19.5.1/gett
  Informative output:\n"));
 diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgmerge.c gettext-0.19.5.1/gettext-tools/src/msgmerge.c
 --- gettext-0.19.5.1.orig/gettext-tools/src/msgmerge.c	2015-06-22 03:42:03.000000000 -0500
-+++ gettext-0.19.5.1/gettext-tools/src/msgmerge.c	2015-08-22 22:34:06.291411023 -0500
++++ gettext-0.19.5.1/gettext-tools/src/msgmerge.c	2015-08-28 10:20:06.014766858 -0500
 @@ -140,6 +140,7 @@
    { "verbose", no_argument, NULL, 'v' },
    { "version", no_argument, NULL, 'V' },
@@ -288,7 +288,7 @@ diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgmerge.c gettext-0.19.5.1/get
  Informative output:\n"));
 diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgunfmt.c gettext-0.19.5.1/gettext-tools/src/msgunfmt.c
 --- gettext-0.19.5.1.orig/gettext-tools/src/msgunfmt.c	2015-06-22 03:42:03.000000000 -0500
-+++ gettext-0.19.5.1/gettext-tools/src/msgunfmt.c	2015-08-22 22:34:06.291411023 -0500
++++ gettext-0.19.5.1/gettext-tools/src/msgunfmt.c	2015-08-28 10:20:06.014766858 -0500
 @@ -101,6 +101,7 @@
    { "verbose", no_argument, NULL, 'v' },
    { "version", no_argument, NULL, 'V' },
@@ -320,7 +320,7 @@ diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgunfmt.c gettext-0.19.5.1/get
  Informative output:\n"));
 diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msguniq.c gettext-0.19.5.1/gettext-tools/src/msguniq.c
 --- gettext-0.19.5.1.orig/gettext-tools/src/msguniq.c	2015-06-22 03:42:03.000000000 -0500
-+++ gettext-0.19.5.1/gettext-tools/src/msguniq.c	2015-08-22 22:34:06.291411023 -0500
++++ gettext-0.19.5.1/gettext-tools/src/msguniq.c	2015-08-28 10:20:06.014766858 -0500
 @@ -86,6 +86,7 @@
    { "use-first", no_argument, NULL, CHAR_MAX + 1 },
    { "version", no_argument, NULL, 'V' },
@@ -352,7 +352,7 @@ diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msguniq.c gettext-0.19.5.1/gett
  Informative output:\n"));
 diff -ru gettext-0.19.5.1.orig/gettext-tools/src/read-catalog-abstract.c gettext-0.19.5.1/gettext-tools/src/read-catalog-abstract.c
 --- gettext-0.19.5.1.orig/gettext-tools/src/read-catalog-abstract.c	2015-06-22 03:42:03.000000000 -0500
-+++ gettext-0.19.5.1/gettext-tools/src/read-catalog-abstract.c	2015-08-22 22:34:06.291411023 -0500
++++ gettext-0.19.5.1/gettext-tools/src/read-catalog-abstract.c	2015-08-28 10:20:06.014766858 -0500
 @@ -445,6 +445,39 @@
      }
  }
@@ -407,7 +407,7 @@ diff -ru gettext-0.19.5.1.orig/gettext-tools/src/read-catalog-abstract.c gettext
               through optional spaces.  */
 diff -ru gettext-0.19.5.1.orig/gettext-tools/src/write-po.c gettext-0.19.5.1/gettext-tools/src/write-po.c
 --- gettext-0.19.5.1.orig/gettext-tools/src/write-po.c	2015-06-22 03:42:03.000000000 -0500
-+++ gettext-0.19.5.1/gettext-tools/src/write-po.c	2015-08-22 22:35:13.843413530 -0500
++++ gettext-0.19.5.1/gettext-tools/src/write-po.c	2015-08-28 10:22:30.990768968 -0500
 @@ -304,6 +304,11 @@
      }
  }
@@ -457,10 +457,20 @@ diff -ru gettext-0.19.5.1.orig/gettext-tools/src/write-po.c gettext-0.19.5.1/get
  
  /* --add-location argument handling.  Return an error indicator.  */
  bool
-Only in gettext-0.19.5.1/gettext-tools/src: write-po.c~
+@@ -878,8 +895,8 @@
+               *ap++ = attr | ATTR_ESCAPE_SEQUENCE;
+               *ap++ = attr | ATTR_ESCAPE_SEQUENCE;
+               /* We warn about any use of escape sequences beside
+-                 '\n' and '\t'.  */
+-              if (c != 'n' && c != 't')
++                 '\a', '\n', '\r', and '\t'.  */
++              if (c != 'a' && c != 'n' && c != 'r' && c != 't')
+                 {
+                   char *error_message =
+                     xasprintf (_("\
 diff -ru gettext-0.19.5.1.orig/gettext-tools/src/write-po.h gettext-0.19.5.1/gettext-tools/src/write-po.h
 --- gettext-0.19.5.1.orig/gettext-tools/src/write-po.h	2015-06-22 03:42:03.000000000 -0500
-+++ gettext-0.19.5.1/gettext-tools/src/write-po.h	2015-08-22 22:34:06.291411023 -0500
++++ gettext-0.19.5.1/gettext-tools/src/write-po.h	2015-08-28 10:20:06.018766858 -0500
 @@ -62,6 +62,8 @@
  
  /* These functions set some parameters for use by 'output_format_po.print'.  */
@@ -472,7 +482,7 @@ diff -ru gettext-0.19.5.1.orig/gettext-tools/src/write-po.h gettext-0.19.5.1/get
         message_print_style_indent (void);
 diff -ru gettext-0.19.5.1.orig/gettext-tools/src/xgettext.c gettext-0.19.5.1/gettext-tools/src/xgettext.c
 --- gettext-0.19.5.1.orig/gettext-tools/src/xgettext.c	2015-06-22 03:42:04.000000000 -0500
-+++ gettext-0.19.5.1/gettext-tools/src/xgettext.c	2015-08-22 22:34:06.291411023 -0500
++++ gettext-0.19.5.1/gettext-tools/src/xgettext.c	2015-08-28 10:20:06.018766858 -0500
 @@ -254,6 +254,7 @@
    { "trigraphs", no_argument, NULL, 'T' },
    { "version", no_argument, NULL, 'V' },
