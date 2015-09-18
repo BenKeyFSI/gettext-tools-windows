@@ -1,12 +1,12 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
-        <id>Gettext.Tools</id>
+        <id>Gettext.Tools.FS</id>
         <version>0.19.5.1</version>
-        <title>GNU gettext tools for Windows</title>
-        <authors>Vaclav Slavik</authors>
-        <licenseUrl>https://github.com/vslavik/gettext-tools-windows/blob/master/LICENSE</licenseUrl>
-        <projectUrl>https://github.com/vslavik/gettext-tools-windows</projectUrl>
+        <title>GNU gettext tools for Windows, with enhancements by Freedom Scientific</title>
+        <authors>Vaclav Slavik,Ben Key</authors>
+        <licenseUrl>https://github.com/BenKeyFSI/gettext-tools-windows/blob/master/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/BenKeyFSI/gettext-tools-windows</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Windows build of GNU gettext tools (msgfmt, xgettext etc.).</description>
         <copyright>Copyright (C) Free Software Foundation, Inc. {http://fsf.org/}</copyright>
