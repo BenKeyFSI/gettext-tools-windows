@@ -2,20 +2,22 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>Gettext.Tools.FS</id>
-        <version>0.19.5.1</version>
+        <version>0.19.7.001</version>
         <title>GNU gettext tools for Windows, with enhancements by Freedom Scientific</title>
         <authors>Vaclav Slavik,Ben Key</authors>
         <licenseUrl>https://github.com/BenKeyFSI/gettext-tools-windows/blob/master/LICENSE</licenseUrl>
         <projectUrl>https://github.com/BenKeyFSI/gettext-tools-windows</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Windows build of GNU gettext tools (msgfmt, xgettext etc.).</description>
+        <description>Windows build of GNU gettext tools (msgfmt, xgettext etc.), maintained by Freedom Scientific.</description>
         <copyright>Copyright (C) Free Software Foundation, Inc. {http://fsf.org/}</copyright>
         <language>en-US</language>
         <tags>gnu gettext msgfmt xgettext msgmerge</tags>
     </metadata>
 
     <files>
-        <file src="build\dist\bin\*" target="tools" />
+        <file src="build\dist\bin\*" target="tools\bin" />
+        <file src="build\dist\lib\**" target="tools\lib" />
+        <file src="build\dist\share\**" target="tools\share" />
         <file src="build\dist\license.txt" target="" />
         <file src="build\dist\readme.txt" target="" />
     </files>

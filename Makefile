@@ -1,24 +1,28 @@
-GETTEXT_VERSION  = 0.19.5.1
-LIBICONV_VERSION = 1.14
-EXPAT_VERSION    = 2.1.0
+GETTEXT_VERSION   = 0.19.7
+LIBICONV_VERSION  = 1.14
 
 # version of the gettext-tools-windows package; usually same as GETTEXT_VERSION
-PACKAGE_VERSION  = $(GETTEXT_VERSION)
+PACKAGE_VERSION   = $(GETTEXT_VERSION)
 
-EXPAT_FLAGS       = --disable-static
+# Awful trickery to undo MSYS's magical path conversion (see
+# http://www.mingw.org/wiki/Posix_path_conversion) which happens to break
+# gettext's executable relocation support.
+MSYS_PREFIX       = c:/usr/local
+UNIX_PREFIX       = /usr/local
 
-LIBICONV_FLAGS    = --disable-static \
+LIBICONV_FLAGS    = --prefix=$(MSYS_PREFIX) \
+					--disable-static \
 					--disable-dependency-tracking \
 					--disable-rpath \
 					--disable-nls
 
-GETTEXT_FLAGS     = --disable-static \
+GETTEXT_FLAGS     = --prefix=$(MSYS_PREFIX) \
+					--disable-static \
 					--disable-dependency-tracking \
 					--enable-silent-rules \
 					--with-libiconv-prefix=$(USR_LOCAL) \
-					--with-libexpat-prefix=$(USR_LOCAL) \
 					--disable-rpath \
-					--disable-nls \
+					--enable-nls \
 					--disable-csharp \
 					--disable-java \
 					--enable-threads=win32 \
@@ -38,17 +42,11 @@ DISTDIR     = $(BUILDDIR)/dist
 
 ARCHIVE_FILE = $(BUILDDIR)/gettext-tools-windows-$(PACKAGE_VERSION).zip
 
-EXPAT_FILE  := expat-$(EXPAT_VERSION).tar.gz
-EXPAT_URL   := http://downloads.sourceforge.net/project/expat/expat/$(EXPAT_VERSION)/$(EXPAT_FILE)
-
 LIBICONV_FILE := libiconv-$(LIBICONV_VERSION).tar.gz
 LIBICONV_URL  := http://ftp.gnu.org/pub/gnu/libiconv/$(LIBICONV_FILE)
 
 GETTEXT_FILE := gettext-$(GETTEXT_VERSION).tar.gz
 GETTEXT_URL  := http://ftp.gnu.org/pub/gnu/gettext/$(GETTEXT_FILE)
-
-EXPAT_DOWNLOAD := $(DOWNLOADDIR)/$(EXPAT_FILE)
-EXPAT_COMPILE  := $(COMPILEDIR)/EXPAT.built
 
 LIBICONV_DOWNLOAD := $(DOWNLOADDIR)/$(LIBICONV_FILE)
 LIBICONV_COMPILE  := $(COMPILEDIR)/LIBICONV.built
@@ -62,23 +60,6 @@ GETTEXT_PATCHES  := $(wildcard $(PATCHESDIR)/gettext*)
 all: archive
 
 compile: $(GETTEXT_COMPILE)
-
-
-$(EXPAT_DOWNLOAD):
-	mkdir -p $(DOWNLOADDIR)
-	wget -O $@ $(EXPAT_URL)
-
-$(EXPAT_COMPILE): $(EXPAT_DOWNLOAD)
-	mkdir -p $(COMPILEDIR)
-	mkdir -p $(STAGEDIR)
-	tar -C $(COMPILEDIR) -xzf $<
-	cd $(COMPILEDIR)/expat-$(EXPAT_VERSION) && \
-		./configure $(EXPAT_FLAGS) CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" && \
-		make && \
-		make install DESTDIR=$(STAGEDIR)
-	touch $@
-
-
 
 $(LIBICONV_DOWNLOAD):
 	mkdir -p $(DOWNLOADDIR)
@@ -95,7 +76,7 @@ $(LIBICONV_COMPILE): $(LIBICONV_DOWNLOAD)
 	cd $(COMPILEDIR)/libiconv-$(LIBICONV_VERSION) && \
 		./configure $(LIBICONV_FLAGS) CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" && \
 		make && \
-		make install DESTDIR=$(STAGEDIR)
+		make install DESTDIR=$(STAGEDIR) prefix=$(UNIX_PREFIX)
 	touch $@
 
 
@@ -104,7 +85,7 @@ $(GETTEXT_DOWNLOAD):
 	mkdir -p $(DOWNLOADDIR)
 	wget -O $@ $(GETTEXT_URL)
 
-$(GETTEXT_COMPILE): $(GETTEXT_DOWNLOAD) $(EXPAT_COMPILE) $(LIBICONV_COMPILE)
+$(GETTEXT_COMPILE): $(GETTEXT_DOWNLOAD) $(LIBICONV_COMPILE)
 	mkdir -p $(COMPILEDIR)
 	mkdir -p $(STAGEDIR)
 	tar -C $(COMPILEDIR) -xzf $<
@@ -115,13 +96,13 @@ $(GETTEXT_COMPILE): $(GETTEXT_DOWNLOAD) $(EXPAT_COMPILE) $(LIBICONV_COMPILE)
 	cd $(COMPILEDIR)/gettext-$(GETTEXT_VERSION) && \
 		./configure $(GETTEXT_FLAGS) CFLAGS="$(CFLAGS)" CXXFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" && \
 		make -C gettext-tools && \
-		make -C gettext-tools install DESTDIR=$(STAGEDIR)
+		make -C gettext-tools install DESTDIR=$(STAGEDIR) prefix=$(UNIX_PREFIX)
 	touch $@
 
 
 dist: compile
 	rm -rf $(DISTDIR)
-	mkdir -p $(DISTDIR)/bin
+	mkdir -p $(DISTDIR)/{bin,lib/gettext,share,doc}
 	cp -a LICENSE $(DISTDIR)/license.txt
 	cp -a README.md $(DISTDIR)/readme.txt
 	cp -a $(USR_LOCAL)/bin/msg*.exe $(DISTDIR)/bin/
@@ -132,7 +113,9 @@ dist: compile
 	cp -a /mingw/bin/libstdc++*.dll $(DISTDIR)/bin
 	cp -a /mingw/bin/libgomp*.dll $(DISTDIR)/bin
 	cp -a /mingw/bin/pthreadGC2.dll $(DISTDIR)/bin
-	mkdir -p $(DISTDIR)/doc
+	cp -a $(USR_LOCAL)/lib/gettext/cldr-plurals.exe $(DISTDIR)/lib/gettext
+	cp -a $(USR_LOCAL)/share/gettext-$(GETTEXT_VERSION) $(DISTDIR)/share/gettext
+	cp -a $(USR_LOCAL)/share/locale $(DISTDIR)/share/
 	cp -a $(USR_LOCAL)/share/doc/gettext/*.html $(DISTDIR)/doc/
 	strip --strip-all $(USR_LOCAL)/bin/*.dll $(USR_LOCAL)/bin/*.exe
 
