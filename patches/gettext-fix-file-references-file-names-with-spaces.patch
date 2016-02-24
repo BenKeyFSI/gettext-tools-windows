@@ -1,14 +1,14 @@
-diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgattrib.c gettext-0.19.5.1/gettext-tools/src/msgattrib.c
---- gettext-0.19.5.1.orig/gettext-tools/src/msgattrib.c	2015-06-22 03:42:03.000000000 -0500
-+++ gettext-0.19.5.1/gettext-tools/src/msgattrib.c	2015-08-29 12:47:16.006383436 -0500
-@@ -120,6 +120,7 @@
-   { "untranslated", no_argument, NULL, CHAR_MAX + 2 },
-   { "version", no_argument, NULL, 'V' },
-   { "width", required_argument, NULL, 'w', },
+diff -ru gettext-0.19.7-orig/gettext-tools/src/msgattrib.c gettext-0.19.7/gettext-tools/src/msgattrib.c
+--- gettext-0.19.7-orig/gettext-tools/src/msgattrib.c	2016-02-24 11:24:05 -0600
++++ gettext-0.19.7/gettext-tools/src/msgattrib.c	2016-02-24 11:31:56 -0600
+@@ -88,6 +88,7 @@
+   { "clear-previous", no_argument, NULL, CHAR_MAX + 18 },
+   { "empty", no_argument, NULL, CHAR_MAX + 23 },
+   { "color", optional_argument, NULL, CHAR_MAX + 19 },
 +  { "combine-refs", no_argument, NULL, CHAR_MAX + 24 },
-   { NULL, 0, NULL, 0 }
- };
- 
+   { "directory", required_argument, NULL, 'D' },
+   { "escape", no_argument, NULL, 'E' },
+   { "force-po", no_argument, &force_po, 1 },
 @@ -343,6 +344,10 @@
          to_change |= REMOVE_TRANSLATION;
          break;
@@ -30,17 +30,17 @@ diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgattrib.c gettext-0.19.5.1/ge
        printf ("\n");
        printf (_("\
  Informative output:\n"));
-diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgcat.c gettext-0.19.5.1/gettext-tools/src/msgcat.c
---- gettext-0.19.5.1.orig/gettext-tools/src/msgcat.c	2015-06-22 03:42:03.000000000 -0500
-+++ gettext-0.19.5.1/gettext-tools/src/msgcat.c	2015-08-29 12:47:16.006383436 -0500
-@@ -91,6 +91,7 @@
-   { "width", required_argument, NULL, 'w', },
-   { "more-than", required_argument, NULL, '>', },
-   { "less-than", required_argument, NULL, '<', },
+diff -ru gettext-0.19.7-orig/gettext-tools/src/msgcat.c gettext-0.19.7/gettext-tools/src/msgcat.c
+--- gettext-0.19.7-orig/gettext-tools/src/msgcat.c	2016-02-24 11:24:05 -0600
++++ gettext-0.19.7/gettext-tools/src/msgcat.c	2016-02-24 11:34:03 -0600
+@@ -65,6 +65,7 @@
+ {
+   { "add-location", optional_argument, NULL, 'n' },
+   { "color", optional_argument, NULL, CHAR_MAX + 5 },
 +  { "combine-refs", no_argument, NULL, CHAR_MAX + 9 },
-   { NULL, 0, NULL, 0 }
- };
- 
+   { "directory", required_argument, NULL, 'D' },
+   { "escape", no_argument, NULL, 'E' },
+   { "files-from", required_argument, NULL, 'f' },
 @@ -282,6 +283,10 @@
          message_print_style_filepos (filepos_comment_none);
          break;
@@ -62,17 +62,17 @@ diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgcat.c gettext-0.19.5.1/gette
        printf ("\n");
        printf (_("\
  Informative output:\n"));
-diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgcomm.c gettext-0.19.5.1/gettext-tools/src/msgcomm.c
---- gettext-0.19.5.1.orig/gettext-tools/src/msgcomm.c	2015-06-22 03:42:03.000000000 -0500
-+++ gettext-0.19.5.1/gettext-tools/src/msgcomm.c	2015-08-29 12:47:16.006383436 -0500
-@@ -92,6 +92,7 @@
-   { "width", required_argument, NULL, 'w', },
-   { "more-than", required_argument, NULL, '>', },
-   { "less-than", required_argument, NULL, '<', },
+diff -ru gettext-0.19.7-orig/gettext-tools/src/msgcomm.c gettext-0.19.7/gettext-tools/src/msgcomm.c
+--- gettext-0.19.7-orig/gettext-tools/src/msgcomm.c	2016-02-24 11:24:05 -0600
++++ gettext-0.19.7/gettext-tools/src/msgcomm.c	2016-02-24 11:34:22 -0600
+@@ -66,6 +66,7 @@
+ {
+   { "add-location", optional_argument, NULL, 'n' },
+   { "color", optional_argument, NULL, CHAR_MAX + 5 },
 +  { "combine-refs", no_argument, NULL, CHAR_MAX + 8 },
-   { NULL, 0, NULL, 0 }
- };
- 
+   { "directory", required_argument, NULL, 'D' },
+   { "escape", no_argument, NULL, 'E' },
+   { "files-from", required_argument, NULL, 'f' },
 @@ -273,6 +274,10 @@
          message_print_style_filepos (filepos_comment_none);
          break;
@@ -94,17 +94,17 @@ diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgcomm.c gettext-0.19.5.1/gett
        printf ("\n");
        printf (_("\
  Informative output:\n"));
-diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgconv.c gettext-0.19.5.1/gettext-tools/src/msgconv.c
---- gettext-0.19.5.1.orig/gettext-tools/src/msgconv.c	2015-06-22 03:42:03.000000000 -0500
-+++ gettext-0.19.5.1/gettext-tools/src/msgconv.c	2015-08-29 12:47:16.006383436 -0500
-@@ -83,6 +83,7 @@
-   { "to-code", required_argument, NULL, 't' },
-   { "version", no_argument, NULL, 'V' },
-   { "width", required_argument, NULL, 'w', },
+diff -ru gettext-0.19.7-orig/gettext-tools/src/msgconv.c gettext-0.19.7/gettext-tools/src/msgconv.c
+--- gettext-0.19.7-orig/gettext-tools/src/msgconv.c	2016-02-24 11:24:05 -0600
++++ gettext-0.19.7/gettext-tools/src/msgconv.c	2016-02-24 11:34:33 -0600
+@@ -63,6 +63,7 @@
+ {
+   { "add-location", optional_argument, NULL, 'n' },
+   { "color", optional_argument, NULL, CHAR_MAX + 4 },
 +  { "combine-refs", no_argument, NULL, CHAR_MAX + 7 },
-   { NULL, 0, NULL, 0 }
- };
- 
+   { "directory", required_argument, NULL, 'D' },
+   { "escape", no_argument, NULL, 'E' },
+   { "force-po", no_argument, &force_po, 1 },
 @@ -232,6 +233,10 @@
          message_print_style_filepos (filepos_comment_none);
          break;
@@ -126,17 +126,17 @@ diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgconv.c gettext-0.19.5.1/gett
        printf ("\n");
        printf (_("\
  Informative output:\n"));
-diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgen.c gettext-0.19.5.1/gettext-tools/src/msgen.c
---- gettext-0.19.5.1.orig/gettext-tools/src/msgen.c	2015-06-22 03:42:03.000000000 -0500
-+++ gettext-0.19.5.1/gettext-tools/src/msgen.c	2015-08-29 12:47:16.006383436 -0500
-@@ -80,6 +80,7 @@
-   { "style", required_argument, NULL, CHAR_MAX + 6 },
-   { "version", no_argument, NULL, 'V' },
-   { "width", required_argument, NULL, 'w', },
+diff -ru gettext-0.19.7-orig/gettext-tools/src/msgen.c gettext-0.19.7/gettext-tools/src/msgen.c
+--- gettext-0.19.7-orig/gettext-tools/src/msgen.c	2016-02-24 11:24:05 -0600
++++ gettext-0.19.7/gettext-tools/src/msgen.c	2016-02-24 11:34:43 -0600
+@@ -60,6 +60,7 @@
+ {
+   { "add-location", optional_argument, NULL, 'n' },
+   { "color", optional_argument, NULL, CHAR_MAX + 5 },
 +  { "combine-refs", no_argument, NULL, CHAR_MAX + 8 },
-   { NULL, 0, NULL, 0 }
- };
- 
+   { "directory", required_argument, NULL, 'D' },
+   { "escape", no_argument, NULL, 'E' },
+   { "force-po", no_argument, &force_po, 1 },
 @@ -229,6 +230,10 @@
          message_print_style_filepos (filepos_comment_none);
          break;
@@ -158,17 +158,17 @@ diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgen.c gettext-0.19.5.1/gettex
        printf ("\n");
        printf (_("\
  Informative output:\n"));
-diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgfilter.c gettext-0.19.5.1/gettext-tools/src/msgfilter.c
---- gettext-0.19.5.1.orig/gettext-tools/src/msgfilter.c	2015-06-22 03:42:03.000000000 -0500
-+++ gettext-0.19.5.1/gettext-tools/src/msgfilter.c	2015-08-29 12:47:16.006383436 -0500
-@@ -113,6 +113,7 @@
-   { "style", required_argument, NULL, CHAR_MAX + 7 },
-   { "version", no_argument, NULL, 'V' },
-   { "width", required_argument, NULL, 'w', },
+diff -ru gettext-0.19.7-orig/gettext-tools/src/msgfilter.c gettext-0.19.7/gettext-tools/src/msgfilter.c
+--- gettext-0.19.7-orig/gettext-tools/src/msgfilter.c	2016-02-24 11:24:05 -0600
++++ gettext-0.19.7/gettext-tools/src/msgfilter.c	2016-02-24 11:34:54 -0600
+@@ -91,6 +91,7 @@
+ {
+   { "add-location", optional_argument, NULL, 'n' },
+   { "color", optional_argument, NULL, CHAR_MAX + 6 },
 +  { "combine-refs", no_argument, NULL, CHAR_MAX + 10 },
-   { NULL, 0, NULL, 0 }
- };
- 
+   { "directory", required_argument, NULL, 'D' },
+   { "escape", no_argument, NULL, 'E' },
+   { "force-po", no_argument, &force_po, 1 },
 @@ -276,6 +277,10 @@
          newline = true;
          break;
@@ -190,17 +190,17 @@ diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgfilter.c gettext-0.19.5.1/ge
        printf ("\n");
        printf (_("\
  Informative output:\n"));
-diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msggrep.c gettext-0.19.5.1/gettext-tools/src/msggrep.c
---- gettext-0.19.5.1.orig/gettext-tools/src/msggrep.c	2015-06-22 03:42:03.000000000 -0500
-+++ gettext-0.19.5.1/gettext-tools/src/msggrep.c	2015-08-29 12:47:16.006383436 -0500
-@@ -126,6 +126,7 @@
-   { "style", required_argument, NULL, CHAR_MAX + 10 },
-   { "version", no_argument, NULL, 'V' },
-   { "width", required_argument, NULL, 'w' },
+diff -ru gettext-0.19.7-orig/gettext-tools/src/msggrep.c gettext-0.19.7/gettext-tools/src/msggrep.c
+--- gettext-0.19.7-orig/gettext-tools/src/msggrep.c	2016-02-24 11:24:05 -0600
++++ gettext-0.19.7/gettext-tools/src/msggrep.c	2016-02-24 11:35:10 -0600
+@@ -94,6 +94,7 @@
+ {
+   { "add-location", optional_argument, NULL, 'n' },
+   { "color", optional_argument, NULL, CHAR_MAX + 9 },
 +  { "combine-refs", no_argument, NULL, CHAR_MAX + 12 },
-   { NULL, 0, NULL, 0 }
- };
- 
+   { "comment", no_argument, NULL, 'C' },
+   { "directory", required_argument, NULL, 'D' },
+   { "domain", required_argument, NULL, 'M' },
 @@ -407,6 +408,10 @@
          message_print_style_filepos (filepos_comment_none);
          break;
@@ -222,17 +222,17 @@ diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msggrep.c gettext-0.19.5.1/gett
        printf ("\n");
        printf (_("\
  Informative output:\n"));
-diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msginit.c gettext-0.19.5.1/gettext-tools/src/msginit.c
---- gettext-0.19.5.1.orig/gettext-tools/src/msginit.c	2015-07-09 03:16:10.000000000 -0500
-+++ gettext-0.19.5.1/gettext-tools/src/msginit.c	2015-08-29 12:47:16.006383436 -0500
-@@ -128,6 +128,7 @@
-   { "style", required_argument, NULL, CHAR_MAX + 6 },
-   { "version", no_argument, NULL, 'V' },
-   { "width", required_argument, NULL, 'w' },
+diff -ru gettext-0.19.7-orig/gettext-tools/src/msginit.c gettext-0.19.7/gettext-tools/src/msginit.c
+--- gettext-0.19.7-orig/gettext-tools/src/msginit.c	2016-02-24 11:24:05 -0600
++++ gettext-0.19.7/gettext-tools/src/msginit.c	2016-02-24 11:35:19 -0600
+@@ -115,6 +115,7 @@
+ static const struct option long_options[] =
+ {
+   { "color", optional_argument, NULL, CHAR_MAX + 5 },
 +  { "combine-refs", no_argument, NULL, CHAR_MAX + 7 },
-   { NULL, 0, NULL, 0 }
- };
- 
+   { "help", no_argument, NULL, 'h' },
+   { "input", required_argument, NULL, 'i' },
+   { "locale", required_argument, NULL, 'l' },
 @@ -256,6 +257,10 @@
          handle_style_option (optarg);
          break;
@@ -254,17 +254,17 @@ diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msginit.c gettext-0.19.5.1/gett
        printf ("\n");
        printf (_("\
  Informative output:\n"));
-diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgmerge.c gettext-0.19.5.1/gettext-tools/src/msgmerge.c
---- gettext-0.19.5.1.orig/gettext-tools/src/msgmerge.c	2015-06-22 03:42:03.000000000 -0500
-+++ gettext-0.19.5.1/gettext-tools/src/msgmerge.c	2015-08-29 12:47:16.006383436 -0500
-@@ -140,6 +140,7 @@
-   { "verbose", no_argument, NULL, 'v' },
-   { "version", no_argument, NULL, 'V' },
-   { "width", required_argument, NULL, 'w', },
+diff -ru gettext-0.19.7-orig/gettext-tools/src/msgmerge.c gettext-0.19.7/gettext-tools/src/msgmerge.c
+--- gettext-0.19.7-orig/gettext-tools/src/msgmerge.c	2016-02-24 11:24:05 -0600
++++ gettext-0.19.7/gettext-tools/src/msgmerge.c	2016-02-24 11:35:33 -0600
+@@ -111,6 +111,7 @@
+   { "add-location", optional_argument, NULL, 'n' },
+   { "backup", required_argument, NULL, CHAR_MAX + 1 },
+   { "color", optional_argument, NULL, CHAR_MAX + 9 },
 +  { "combine-refs", no_argument, NULL, CHAR_MAX + 12 },
-   { NULL, 0, NULL, 0 }
- };
- 
+   { "compendium", required_argument, NULL, 'C', },
+   { "directory", required_argument, NULL, 'D' },
+   { "escape", no_argument, NULL, 'E' },
 @@ -344,6 +345,10 @@
          message_print_style_filepos (filepos_comment_none);
          break;
@@ -286,17 +286,17 @@ diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgmerge.c gettext-0.19.5.1/get
        printf ("\n");
        printf (_("\
  Informative output:\n"));
-diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgunfmt.c gettext-0.19.5.1/gettext-tools/src/msgunfmt.c
---- gettext-0.19.5.1.orig/gettext-tools/src/msgunfmt.c	2015-06-22 03:42:03.000000000 -0500
-+++ gettext-0.19.5.1/gettext-tools/src/msgunfmt.c	2015-08-29 12:47:16.010383436 -0500
-@@ -101,6 +101,7 @@
-   { "verbose", no_argument, NULL, 'v' },
-   { "version", no_argument, NULL, 'V' },
-   { "width", required_argument, NULL, 'w', },
+diff -ru gettext-0.19.7-orig/gettext-tools/src/msgunfmt.c gettext-0.19.7/gettext-tools/src/msgunfmt.c
+--- gettext-0.19.7-orig/gettext-tools/src/msgunfmt.c	2016-02-24 11:24:05 -0600
++++ gettext-0.19.7/gettext-tools/src/msgunfmt.c	2016-02-24 11:35:45 -0600
+@@ -80,6 +80,7 @@
+ static const struct option long_options[] =
+ {
+   { "color", optional_argument, NULL, CHAR_MAX + 6 },
 +  { "combine-refs", no_argument, NULL, CHAR_MAX + 8 },
-   { NULL, 0, NULL, 0 }
- };
- 
+   { "csharp", no_argument, NULL, CHAR_MAX + 4 },
+   { "csharp-resources", no_argument, NULL, CHAR_MAX + 5 },
+   { "escape", no_argument, NULL, 'E' },
 @@ -250,6 +251,10 @@
          handle_style_option (optarg);
          break;
@@ -318,17 +318,17 @@ diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msgunfmt.c gettext-0.19.5.1/get
        printf ("\n");
        printf (_("\
  Informative output:\n"));
-diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msguniq.c gettext-0.19.5.1/gettext-tools/src/msguniq.c
---- gettext-0.19.5.1.orig/gettext-tools/src/msguniq.c	2015-06-22 03:42:03.000000000 -0500
-+++ gettext-0.19.5.1/gettext-tools/src/msguniq.c	2015-08-29 12:47:16.010383436 -0500
-@@ -86,6 +86,7 @@
-   { "use-first", no_argument, NULL, CHAR_MAX + 1 },
-   { "version", no_argument, NULL, 'V' },
-   { "width", required_argument, NULL, 'w', },
+diff -ru gettext-0.19.7-orig/gettext-tools/src/msguniq.c gettext-0.19.7/gettext-tools/src/msguniq.c
+--- gettext-0.19.7-orig/gettext-tools/src/msguniq.c	2016-02-24 11:24:05 -0600
++++ gettext-0.19.7/gettext-tools/src/msguniq.c	2016-02-24 11:35:55 -0600
+@@ -63,6 +63,7 @@
+ {
+   { "add-location", optional_argument, NULL, 'n' },
+   { "color", optional_argument, NULL, CHAR_MAX + 5 },
 +  { "combine-refs", no_argument, NULL, CHAR_MAX + 8 },
-   { NULL, 0, NULL, 0 }
- };
- 
+   { "directory", required_argument, NULL, 'D' },
+   { "escape", no_argument, NULL, 'E' },
+   { "force-po", no_argument, &force_po, 1 },
 @@ -252,6 +253,10 @@
          message_print_style_filepos (filepos_comment_none);
          break;
@@ -350,12 +350,12 @@ diff -ru gettext-0.19.5.1.orig/gettext-tools/src/msguniq.c gettext-0.19.5.1/gett
        printf ("\n");
        printf (_("\
  Informative output:\n"));
-diff -ru gettext-0.19.5.1.orig/gettext-tools/src/read-catalog-abstract.c gettext-0.19.5.1/gettext-tools/src/read-catalog-abstract.c
---- gettext-0.19.5.1.orig/gettext-tools/src/read-catalog-abstract.c	2015-06-22 03:42:03.000000000 -0500
-+++ gettext-0.19.5.1/gettext-tools/src/read-catalog-abstract.c	2015-08-29 12:47:16.010383436 -0500
-@@ -445,6 +445,39 @@
-     }
+diff -ru gettext-0.19.7-orig/gettext-tools/src/read-catalog-abstract.c gettext-0.19.7/gettext-tools/src/read-catalog-abstract.c
+--- gettext-0.19.7-orig/gettext-tools/src/read-catalog-abstract.c	2016-02-24 11:24:05 -0600
++++ gettext-0.19.7/gettext-tools/src/read-catalog-abstract.c	2016-02-24 11:24:15 -0600
+@@ -446,6 +446,40 @@
  }
+ 
  
 +/* Helper function that is used by po_parse_comment_filepos to find the end of the file name.
 +Allows for spaces in file names. */
@@ -390,10 +390,11 @@ diff -ru gettext-0.19.5.1.orig/gettext-tools/src/read-catalog-abstract.c gettext
 +  }
 +  return ret;
 +}
- 
++
  /* Parse a GNU style file comment.
     Syntax: an arbitrary number of
-@@ -464,10 +497,7 @@
+              STRING COLON NUMBER
+@@ -464,10 +498,7 @@
        if (*s != '\0')
          {
            const char *string_start = s;
@@ -405,22 +406,23 @@ diff -ru gettext-0.19.5.1.orig/gettext-tools/src/read-catalog-abstract.c gettext
  
            /* See if there is a COLON and NUMBER after the STRING, separated
               through optional spaces.  */
-diff -ru gettext-0.19.5.1.orig/gettext-tools/src/write-po.c gettext-0.19.5.1/gettext-tools/src/write-po.c
---- gettext-0.19.5.1.orig/gettext-tools/src/write-po.c	2015-06-22 03:42:03.000000000 -0500
-+++ gettext-0.19.5.1/gettext-tools/src/write-po.c	2015-08-29 12:48:37.038384615 -0500
-@@ -304,6 +304,11 @@
-     }
+diff -ru gettext-0.19.7-orig/gettext-tools/src/write-po.c gettext-0.19.7/gettext-tools/src/write-po.c
+--- gettext-0.19.7-orig/gettext-tools/src/write-po.c	2016-02-24 11:24:06 -0600
++++ gettext-0.19.7/gettext-tools/src/write-po.c	2016-02-24 11:24:15 -0600
+@@ -305,6 +305,12 @@
  }
+ 
  
 +/* This variable controls whether or not an attempt is made to combine multiple file references on
 +one line. The default is to not do so. The old behavior of combining multiple file references on one
 +line can be restored by calling the message_page_combine_refs function, which is user accessible via
 +the --combine-refs command line argument. */
 +static bool combine_refs = false;
- 
++
  /* Output mp->filepos as a set of comment lines.  */
  
-@@ -401,7 +406,15 @@
+ static enum filepos_comment_type filepos_comment_type = filepos_comment_full;
+@@ -401,7 +407,15 @@
                else
                  sprintf (buffer, ":%ld", (long) pp->line_number);
                len = strlen (cp) + strlen (buffer) + 1;
@@ -437,27 +439,20 @@ diff -ru gettext-0.19.5.1.orig/gettext-tools/src/write-po.c gettext-0.19.5.1/get
                  {
                    ostream_write_str (stream, "\n#:");
                    column = 2;
-@@ -510,7 +523,6 @@
- 
- /* ========= Some parameters for use by 'msgdomain_list_print_po'. ========= */
- 
--
- /* This variable controls the extent to which the page width applies.
-    True means it applies to message strings and file reference lines.
-    False means it applies to file reference lines only.  */
-@@ -553,6 +565,11 @@
+@@ -552,6 +566,12 @@
+ {
    filepos_comment_type = type;
  }
- 
++ 
 +void
 +message_page_combine_refs(void)
 +{
 +  combine_refs = true;
 +}
  
+ 
  /* --add-location argument handling.  Return an error indicator.  */
- bool
-@@ -877,18 +894,6 @@
+@@ -877,18 +897,6 @@
                *op++ = UC_BREAK_PROHIBITED;
                *ap++ = attr | ATTR_ESCAPE_SEQUENCE;
                *ap++ = attr | ATTR_ESCAPE_SEQUENCE;
@@ -476,9 +471,9 @@ diff -ru gettext-0.19.5.1.orig/gettext-tools/src/write-po.c gettext-0.19.5.1/get
              }
            else if (escape && !c_isprint ((unsigned char) c))
              {
-diff -ru gettext-0.19.5.1.orig/gettext-tools/src/write-po.h gettext-0.19.5.1/gettext-tools/src/write-po.h
---- gettext-0.19.5.1.orig/gettext-tools/src/write-po.h	2015-06-22 03:42:03.000000000 -0500
-+++ gettext-0.19.5.1/gettext-tools/src/write-po.h	2015-08-29 12:47:16.010383436 -0500
+diff -ru gettext-0.19.7-orig/gettext-tools/src/write-po.h gettext-0.19.7/gettext-tools/src/write-po.h
+--- gettext-0.19.7-orig/gettext-tools/src/write-po.h	2016-02-24 11:24:06 -0600
++++ gettext-0.19.7/gettext-tools/src/write-po.h	2016-02-24 11:24:15 -0600
 @@ -62,6 +62,8 @@
  
  /* These functions set some parameters for use by 'output_format_po.print'.  */
@@ -488,29 +483,29 @@ diff -ru gettext-0.19.5.1.orig/gettext-tools/src/write-po.h gettext-0.19.5.1/get
         message_page_width_ignore (void);
  extern void
         message_print_style_indent (void);
-diff -ru gettext-0.19.5.1.orig/gettext-tools/src/xgettext.c gettext-0.19.5.1/gettext-tools/src/xgettext.c
---- gettext-0.19.5.1.orig/gettext-tools/src/xgettext.c	2015-06-22 03:42:04.000000000 -0500
-+++ gettext-0.19.5.1/gettext-tools/src/xgettext.c	2015-08-29 12:47:16.010383436 -0500
-@@ -254,6 +254,7 @@
-   { "trigraphs", no_argument, NULL, 'T' },
-   { "version", no_argument, NULL, 'V' },
-   { "width", required_argument, NULL, 'w', },
-+  { "combine-refs", no_argument, NULL, CHAR_MAX + 19 },
-   { NULL, 0, NULL, 0 }
- };
- 
-@@ -633,6 +634,10 @@
-           error (EXIT_FAILURE, 0, _("sentence end type '%s' unknown"), optarg);
+diff -ru gettext-0.19.7-orig/gettext-tools/src/xgettext.c gettext-0.19.7/gettext-tools/src/xgettext.c
+--- gettext-0.19.7-orig/gettext-tools/src/xgettext.c	2016-02-24 11:24:06 -0600
++++ gettext-0.19.7/gettext-tools/src/xgettext.c	2016-02-24 11:31:16 -0600
+@@ -232,6 +232,7 @@
+   { "c++", no_argument, NULL, 'C' },
+   { "check", required_argument, NULL, CHAR_MAX + 17 },
+   { "color", optional_argument, NULL, CHAR_MAX + 14 },
++  { "combine-refs", no_argument, NULL, CHAR_MAX + 21 },
+   { "copyright-holder", required_argument, NULL, CHAR_MAX + 1 },
+   { "debug", no_argument, &do_debug, 1 },
+   { "default-domain", required_argument, NULL, 'd' },
+@@ -665,6 +666,10 @@
+         add_itstool_comments = true;
          break;
  
-+      case CHAR_MAX + 19: /* --combine-refs */
++      case CHAR_MAX + 21: /* --combine-refs */
 +        message_page_combine_refs();
 +        break;
 +
        default:
          usage (EXIT_FAILURE);
          /* NOTREACHED */
-@@ -1076,6 +1081,9 @@
+@@ -1224,6 +1229,9 @@
        printf (_("\
    -M[STRING], --msgstr-suffix[=STRING]  use STRING or \"\" as suffix for msgstr\n\
                                  values\n"));
